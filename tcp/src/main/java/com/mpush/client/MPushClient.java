@@ -221,7 +221,6 @@ import static com.mpush.api.Constants.MAX_HB_TIMEOUT_COUNT;
         logger.w("<<< do fast connect, message=%s", message);
         message.sendRaw();
         connection.getSessionContext().changeCipher(session.cipher);
-        handshake();
     }
 
     @Override

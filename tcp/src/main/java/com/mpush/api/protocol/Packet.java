@@ -27,6 +27,7 @@ import java.nio.ByteBuffer;
  *
  * @author ohun@live.cn (夜色)
  *         bodyLength(4)+cmd(1)+cc(2)+flags(1)+sessionId(4)+lrc(1)+body(n)
+ *         0xfe(1) + bodyLength(4) + cmd(2) + body(n)
  */
 public final class Packet {
     public static final int HEADER_LEN = 13;//packet包头协议长度

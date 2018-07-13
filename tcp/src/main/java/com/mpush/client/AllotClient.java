@@ -20,10 +20,8 @@
 package com.mpush.client;
 
 
-import com.google.gson.Gson;
 import com.mpush.api.Constants;
 import com.mpush.api.Logger;
-import com.mpush.ez.Update;
 import com.mpush.util.IOUtils;
 
 import javax.net.ssl.*;
@@ -113,12 +111,7 @@ import static com.mpush.api.Constants.DEFAULT_SO_TIMEOUT;
         if (content.length > 0) {
             String result = new String(content, Constants.UTF_8);
             logger.w("get server address success result=%s", result);
-
-//            Gson gson = new Gson();
-//            Update update = gson.fromJson(result,Update.class);
-
             List<String> serverAddress = new ArrayList<>();
-//            serverAddress.addAll(Arrays.asList(update.server.split(",")));
             serverAddress.addAll(Arrays.asList(result.split(",")));
             this.serverAddress = serverAddress;
         } else {
