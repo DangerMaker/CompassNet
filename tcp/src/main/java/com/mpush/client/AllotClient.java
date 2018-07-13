@@ -114,11 +114,12 @@ import static com.mpush.api.Constants.DEFAULT_SO_TIMEOUT;
             String result = new String(content, Constants.UTF_8);
             logger.w("get server address success result=%s", result);
 
-            Gson gson = new Gson();
-            Update update = gson.fromJson(result,Update.class);
+//            Gson gson = new Gson();
+//            Update update = gson.fromJson(result,Update.class);
 
             List<String> serverAddress = new ArrayList<>();
-            serverAddress.addAll(Arrays.asList(update.server.split(",")));
+//            serverAddress.addAll(Arrays.asList(update.server.split(",")));
+            serverAddress.addAll(Arrays.asList(result.split(",")));
             this.serverAddress = serverAddress;
         } else {
             logger.w("get server address failure return content empty.");

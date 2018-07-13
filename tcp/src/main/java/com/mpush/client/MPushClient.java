@@ -186,41 +186,41 @@ import static com.mpush.api.Constants.MAX_HB_TIMEOUT_COUNT;
 
     @Override
     public void fastConnect() {
-//        SessionStorage storage = config.getSessionStorage();
-//        if (storage == null) {
-//            handshake();
-//            return;
-//        }
-//
-//        String ss = storage.getSession();
-//        if (Strings.isBlank(ss)) {
-//            handshake();
-//            return;
-//        }
-//
-//        PersistentSession session = PersistentSession.decode(ss);
-//        if (session == null || session.isExpired()) {
-//            storage.clearSession();
-//            logger.w("fast connect failure session expired, session=%s", session);
-//            handshake();
-//            return;
-//        }
-//
-//        FastConnectMessage message = new FastConnectMessage(connection);
-//        message.deviceId = config.getDeviceId();
-//        message.sessionId = session.sessionId;
-//        message.maxHeartbeat = config.getMaxHeartbeat();
-//        message.minHeartbeat = config.getMinHeartbeat();
-//        message.encodeBody();
-//        ackRequestMgr.add(message.getSessionId(), AckContext
-//                .build(this)
-//                .setRequest(message.getPacket())
-//                .setTimeout(config.getHandshakeTimeoutMills())
-//                .setRetryCount(config.getHandshakeRetryCount())
-//        );
-//        logger.w("<<< do fast connect, message=%s", message);
-//        message.sendRaw();
-//        connection.getSessionContext().changeCipher(session.cipher);
+        SessionStorage storage = config.getSessionStorage();
+        if (storage == null) {
+            handshake();
+            return;
+        }
+
+        String ss = storage.getSession();
+        if (Strings.isBlank(ss)) {
+            handshake();
+            return;
+        }
+
+        PersistentSession session = PersistentSession.decode(ss);
+        if (session == null || session.isExpired()) {
+            storage.clearSession();
+            logger.w("fast connect failure session expired, session=%s", session);
+            handshake();
+            return;
+        }
+
+        FastConnectMessage message = new FastConnectMessage(connection);
+        message.deviceId = config.getDeviceId();
+        message.sessionId = session.sessionId;
+        message.maxHeartbeat = config.getMaxHeartbeat();
+        message.minHeartbeat = config.getMinHeartbeat();
+        message.encodeBody();
+        ackRequestMgr.add(message.getSessionId(), AckContext
+                .build(this)
+                .setRequest(message.getPacket())
+                .setTimeout(config.getHandshakeTimeoutMills())
+                .setRetryCount(config.getHandshakeRetryCount())
+        );
+        logger.w("<<< do fast connect, message=%s", message);
+        message.sendRaw();
+        connection.getSessionContext().changeCipher(session.cipher);
         handshake();
     }
 
